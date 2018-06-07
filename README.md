@@ -1,1 +1,1 @@
-# coup-challenge
+# Coup challenge
