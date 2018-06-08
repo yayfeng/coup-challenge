@@ -10,8 +10,6 @@ class CoupChallenge(object):
         base_url = base_url or 'http://127.0.0.1:8080'
         self.url = base_url.rstrip('/') + '/v0'
 
-        self.url = base_url.rstrip('/') + '/v0'
-
     def num_of_fe(self, scooters, c, p):
         """
         Find number of Fleet Engineers
