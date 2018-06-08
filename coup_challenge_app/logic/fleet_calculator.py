@@ -60,6 +60,9 @@ class FleetCalculator(object):
     def calculate(self):
         """
         Calculate number of FEs
+
+        Returns:
+            int
         """
         total = 0
         max_saved = 0
@@ -67,4 +70,4 @@ class FleetCalculator(object):
             total += self._cal_fe_only(n_scooters)
             max_saved = max(max_saved, self._saved(n_scooters))
 
-        return int(total - max_saved)
+        return total - max_saved

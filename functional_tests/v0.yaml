@@ -1,0 +1,41 @@
+---
+- config:
+    - testset: "Coup challenge app FT"
+    - timeout: 1
+
+- test:
+    - name: "Find number of Fleet Engineers "
+    - url: "/v0/fleet-management"
+    - method: POST
+    - body: '{
+  "P": 5,
+  "C": 12,
+  "scooters": [
+    15,
+    10
+  ]
+}'
+    - headers: {'Content-Type': 'application/json'}
+    - expected_status: [200]
+    - validators:
+        - compare: {jsonpath_mini: 'fleet_engineers', comparator: 'eq', expected: 3}
+
+
+- test:
+    - name: "Invalid parameters "
+    - url: "/v0/fleet-management"
+    - method: POST
+    - body: '{
+  "P": 2000,
+  "C": 12,
+  "scooters": [
+    15,
+    10
+  ]
+}'
+    - headers: {'Content-Type': 'application/json'}
+    - expected_status: [400]
+    - validators:
+        - compare: {jsonpath_mini: 'message', comparator: 'eq', expected: "Input payload validation failed"}
+        - compare: {jsonpath_mini: 'errors.P', comparator: 'eq', expected: "2000 is greater than the maximum of 1000"}
+
